@@ -9,6 +9,7 @@ public class Cashier {
 
     public void runAsManual() {
         Visit visit = getVisitDate();
+        String order = inputView.readOrder();
     }
 
     private Visit getVisitDate() {
