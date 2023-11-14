@@ -37,6 +37,19 @@ public class EventApplicant {
         return totalDiscountAmount;
     }
 
+    public int getTotalDiscount(Map<String, Integer> benefits, int benefitAmount) {
+        Integer discount = benefits.get(Event.증정_이벤트.getName());
+
+        if (discount != null) {
+            benefitAmount -= discount;
+        }
+        return benefitAmount;
+    }
+
+    public int getFinalPayment(int amount, int discount) {
+        return amount - discount;
+    }
+
     public Optional<Gift> getGift(Orders orders) {
         if (orders.getAmount() >= Gift.get().getTargetAmount()) {
             return Optional.of(Gift.get());

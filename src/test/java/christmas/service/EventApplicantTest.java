@@ -91,10 +91,36 @@ class EventApplicantTest {
         //Given
         Visit visit = new Visit(3);
         Orders orders = new Orders("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
-        //When
         Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
+        //When
         int benefitAmount = eventApplicant.getBenefitAmount(benefits);
         //Then
         assertThat(benefitAmount).isEqualTo(31_246);
+    }
+
+    @DisplayName("총 할인 받은 금액 계산")
+    @Test
+    void calcTotalDiscount() {
+        //Given
+        Visit visit = new Visit(3);
+        Orders orders = new Orders("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
+        int benefitAmount = eventApplicant.getBenefitAmount(benefits);
+        //When
+        int totalDiscount = eventApplicant.getTotalDiscount(benefits, benefitAmount);
+        //Then
+        assertThat(totalDiscount).isEqualTo(6_246);
+    }
+
+    @DisplayName("최종 결재 금액 계산")
+    @Test
+    void calcFinalPayment() {
+        //Given
+        int amount = 11_000;
+        int totalDiscount = 1_000;
+        //When
+        int finalPayment = eventApplicant.getFinalPayment(amount, totalDiscount);
+        //Then
+        assertThat(finalPayment).isEqualTo(10_000);
     }
 }

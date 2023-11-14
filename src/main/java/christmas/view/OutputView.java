@@ -24,7 +24,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printAmountBeforeDiscount(int amount) {
+    public void printAmount(int amount) {
         System.out.println("<할인 전 총주문 금액>");
         System.out.println(PRICE_FORMAT.format(amount));
         System.out.println();
@@ -62,4 +62,10 @@ public class OutputView {
         }
         System.out.println(NEGATIVE_PRICE_FORMAT.format(benefitAmount) + "\n");
     }
+
+    public void printFinalPayment(int finalPayment) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(PRICE_FORMAT.format(finalPayment) + "\n");
+    }
+
 }

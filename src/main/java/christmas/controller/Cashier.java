@@ -23,10 +23,11 @@ public class Cashier {
     public void runAsManual() {
         Visit visit = getVisitDate();
         Orders orders = takeOrders();
+        int amount = orders.getAmount();
 
         outputView.printMenu(orders);
 
-        outputView.printAmountBeforeDiscount(orders.getAmount());
+        outputView.printAmount(amount);
 
         Optional<Gift> gift = eventApplicant.getGift(orders);
         outputView.printGift(gift);
@@ -36,6 +37,9 @@ public class Cashier {
 
         int benefitAmount = eventApplicant.getBenefitAmount(benefits);
         outputView.printBenefitAmount(benefitAmount);
+
+        int discount = eventApplicant.getTotalDiscount(benefits, benefitAmount);
+        outputView.printFinalPayment(eventApplicant.getFinalPayment(amount, discount));
     }
 
     private Visit getVisitDate() {
