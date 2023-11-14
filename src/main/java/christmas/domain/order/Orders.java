@@ -1,5 +1,7 @@
 package christmas.domain.order;
 
+import christmas.domain.menu.Menu;
+import christmas.domain.menu.MenuBoard;
 import christmas.exception.ExceptionMessage;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,10 +12,26 @@ public class Orders {
 
     public Orders(String input) {
         OrderFormatValidate(input);
-
-        this.orders = new HashSet<>();
+        this.orders = createOrders(input);
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    private Set<Order> createOrders(String input) {
+        Set<Order> orders = new HashSet<>();
+        String[] inputOrders = input.split(",");
+
+        for (String inputOrder : inputOrders) {
+            String[] menuAndCount = inputOrder.split("-");
+            Menu menu = MenuBoard.getMenu(menuAndCount[0]);
+            int count = Integer.parseInt(menuAndCount[1]);
+
+            orders.add(new Order(menu, count));
+        }
+        return orders;
+    }
 
     private void OrderFormatValidate(String input) {
         if (!isMatchOrderFormat(input)) {

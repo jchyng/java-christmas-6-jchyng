@@ -31,4 +31,19 @@ class OrdersTest {
         //Then
         assertThat(menu).isEqualTo(MenuBoard.해산물파스타.getMenu());
     }
+
+    @DisplayName("주문한 메뉴 목록 생성")
+    @Test
+    void createOrders() {
+        //Given
+        String order = "해산물파스타-2,레드와인-1,초코케이크-1";
+        //When
+        Orders orders = new Orders(order);
+        //Then
+        assertThat(orders.getOrders()).contains(
+                new Order(MenuBoard.getMenu("해산물파스타"), 2),
+                new Order(MenuBoard.getMenu("레드와인"), 1),
+                new Order(MenuBoard.getMenu("초코케이크"), 1)
+        );
+    }
 }
