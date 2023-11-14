@@ -35,6 +35,17 @@ class EventApplicantTest {
         assertThat(gift).isEmpty();
     }
 
+    @DisplayName("크리스마스 디데이 이벤트의 할인 금액을 계산")
+    @Test
+    void calcChristmasEvent() {
+        //Given
+        int date = 25;
+        //When
+        int discount = eventApplicant.getChristmasDiscount(date);
+        //Then
+        assertThat(discount).isEqualTo(3_400);
+    }
+
     @DisplayName("주말 이벤트 총 할인 금액 계산")
     @Test
     void calcWeekendEvent() {
