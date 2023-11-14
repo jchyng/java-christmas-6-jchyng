@@ -35,6 +35,17 @@ class EventApplicantTest {
         assertThat(gift).isEmpty();
     }
 
+    @DisplayName("주말 이벤트 총 할인 금액 계산")
+    @Test
+    void calcWeekendEvent() {
+        //Given
+        Orders orders = new Orders("티본스테이크-2");
+        //When
+        int discount = eventApplicant.getAllWeekendDiscount(orders);
+        //Then
+        assertThat(discount).isEqualTo(Event.주말_할인.discount() * 2);
+    }
+
     @DisplayName("평일 이벤트 총 할인 금액 계산")
     @Test
     void calcWeekdayEvent() {

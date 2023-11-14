@@ -18,6 +18,13 @@ public class Order {
         return menu.getPrice() * count;
     }
 
+    public int getWeekendDiscount(){
+        if(menu.getCategory().equals(MenuCategory.메인)){
+            return Event.주말_할인.discount() * count;
+        }
+        return 0;
+    }
+
     public int getWeekdayDiscount(){
         if(menu.getCategory().equals(MenuCategory.디저트)){
             return Event.평일_할인.discount() * count;
