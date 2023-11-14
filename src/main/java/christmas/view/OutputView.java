@@ -52,4 +52,14 @@ public class OutputView {
         }
         System.out.println();
     }
+
+    public void printBenefitAmount(int benefitAmount) {
+        System.out.println("<총혜택 금액>");
+
+        if (benefitAmount == 0) {
+            System.out.println(EMPTY);
+            return;
+        }
+        System.out.println(NEGATIVE_PRICE_FORMAT.format(benefitAmount) + "\n");
+    }
 }

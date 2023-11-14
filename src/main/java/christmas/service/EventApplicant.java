@@ -29,6 +29,14 @@ public class EventApplicant {
         return benefits;
     }
 
+    public int getBenefitAmount(Map<String, Integer> totalDiscount) {
+        int totalDiscountAmount = 0;
+        for (Integer price : totalDiscount.values()) {
+            totalDiscountAmount += price;
+        }
+        return totalDiscountAmount;
+    }
+
     public Optional<Gift> getGift(Orders orders) {
         if (orders.getAmount() >= Gift.get().getTargetAmount()) {
             return Optional.of(Gift.get());

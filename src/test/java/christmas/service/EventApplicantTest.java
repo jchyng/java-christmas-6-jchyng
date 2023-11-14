@@ -84,4 +84,17 @@ class EventApplicantTest {
         assertThat(benefits.get(Event.특별_할인.getName())).isEqualTo(1_000);
         assertThat(benefits.get(Event.증정_이벤트.getName())).isEqualTo(25_000);
     }
+
+    @DisplayName("모든 이벤트 적용 시 총 혜택 금액 계산")
+    @Test
+    void calcBenefitAmount() {
+        //Given
+        Visit visit = new Visit(3);
+        Orders orders = new Orders("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        //When
+        Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
+        int benefitAmount = eventApplicant.getBenefitAmount(benefits);
+        //Then
+        assertThat(benefitAmount).isEqualTo(31_246);
+    }
 }

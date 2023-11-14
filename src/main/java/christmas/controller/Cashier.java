@@ -33,6 +33,9 @@ public class Cashier {
 
         Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
         outputView.printBenefitInfo(benefits);
+
+        int benefitAmount = eventApplicant.getBenefitAmount(benefits);
+        outputView.printBenefitAmount(benefitAmount);
     }
 
     private Visit getVisitDate() {
