@@ -1,6 +1,7 @@
 package christmas.domain.menu;
 
 import christmas.constant.MenuCategory;
+import christmas.exception.ExceptionMessage;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +41,14 @@ public enum MenuBoard {
     }
 
     public static Menu getMenu(String name) {
-        return menus.get(name);
+        Menu menu = menus.get(name);
+        validate(menu);
+        return menu;
+    }
+
+    private static void validate(Menu menu){
+        if(menu == null){
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
+        }
     }
 }

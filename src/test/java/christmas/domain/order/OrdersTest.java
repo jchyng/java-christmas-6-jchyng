@@ -55,4 +55,13 @@ class OrdersTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 같은 메뉴를 중복으로 주문할 수 없습니다. 다시 입력해 주세요.");
     }
+
+    @DisplayName("없는 메뉴 주문 시 예외 발생")
+    @Test
+    void createOrderByNotExist() {
+        //When & Then
+        assertThatThrownBy(() -> new Orders("없는메뉴-1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
 }
