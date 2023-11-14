@@ -3,6 +3,7 @@ package christmas.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.constant.Event;
 import christmas.constant.Gift;
 import christmas.domain.order.Orders;
 import org.junit.jupiter.api.DisplayName;
@@ -34,4 +35,14 @@ class EventApplicantTest {
         assertThat(gift).isEmpty();
     }
 
+    @DisplayName("평일 이벤트 총 할인 금액 계산")
+    @Test
+    void calcWeekdayEvent() {
+        //Given
+        Orders orders = new Orders("아이스크림-2");
+        //When
+        int discount = eventApplicant.getAllWeekdayDiscount(orders);
+        //Then
+        assertThat(discount).isEqualTo(Event.평일_할인.discount() * 2);
+    }
 }

@@ -1,5 +1,7 @@
 package christmas.domain.order;
 
+import christmas.constant.Event;
+import christmas.constant.MenuCategory;
 import christmas.domain.menu.Menu;
 import java.util.Objects;
 
@@ -14,6 +16,13 @@ public class Order {
 
     public int getAmount() {
         return menu.getPrice() * count;
+    }
+
+    public int getWeekdayDiscount(){
+        if(menu.getCategory().equals(MenuCategory.디저트)){
+            return Event.평일_할인.discount() * count;
+        }
+        return 0;
     }
 
     @Override
