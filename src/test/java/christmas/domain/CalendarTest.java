@@ -108,5 +108,15 @@ class CalendarTest {
         assertThat(isContain).isFalse();
     }
 
-    
+    @DisplayName("증정 이벤트는 12월 내내 적용된다.")
+    @ValueSource(ints = {1,2,3,4,5,6,7})
+    @ParameterizedTest
+    void validGiftEvent(int date) {
+        //Given
+        List<Event> events = calendar.getEventsByDate(date);
+        //When
+        boolean isContain = events.contains(Event.증정_이벤트);
+        //Then
+        assertThat(isContain).isTrue();
+    }
 }
