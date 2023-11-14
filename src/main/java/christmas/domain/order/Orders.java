@@ -19,6 +19,12 @@ public class Orders {
         this.orders = createOrders(input);
     }
 
+    public int getAmount() {
+        return orders.stream()
+                .mapToInt(Order::getAmount)
+                .sum();
+    }
+
     public List<Order> getOrders() {
         return orders;
     }
@@ -42,7 +48,7 @@ public class Orders {
         if (isDuplicateOrder(orders)) {
             throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
         }
-        if(isOverMAXCount(orders)){
+        if (isOverMAXCount(orders)) {
             throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
         }
         if (isOnlyJuice(orders)) {
@@ -71,11 +77,11 @@ public class Orders {
         return false;
     }
 
-    private boolean isOverMAXCount(List<Order> orders){
+    private boolean isOverMAXCount(List<Order> orders) {
         int count = orders.stream()
                 .mapToInt(Order::getCount)
                 .sum();
-        if(count > MAX_COUNT){
+        if (count > MAX_COUNT) {
             return true;
         }
         return false;

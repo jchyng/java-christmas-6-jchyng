@@ -15,6 +15,8 @@ public class Cashier {
         Orders orders = takeOrders();
 
         outputView.printMenu(orders);
+        outputView.printAmountBeforeDiscount(orders.getAmount());
+
     }
 
     private Visit getVisitDate() {

@@ -82,4 +82,15 @@ class OrdersTest {
                 .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
 
     }
+
+    @DisplayName("주문 목록의 총 금액을 계산")
+    @Test
+    void calcAmountForOrders() {
+        //Given
+        Orders orders = new Orders("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        //When
+        int amount = orders.getAmount();
+        //Then
+        assertThat(amount).isEqualTo(142_000);
+    }
 }

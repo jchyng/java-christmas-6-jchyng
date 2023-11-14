@@ -12,6 +12,10 @@ public class Order {
         this.count = count;
     }
 
+    public int getAmount() {
+        return menu.getPrice() * count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
