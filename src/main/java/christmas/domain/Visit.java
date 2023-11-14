@@ -9,6 +9,10 @@ public class Visit {
         this.date = date;
     }
 
+    public int getDate() {
+        return date;
+    }
+
     private void validate(int date) {
         if (!isWithinRange(date)) {
             throw new IllegalArgumentException(ExceptionMessage.VISIT_FORMAT.getMessage());

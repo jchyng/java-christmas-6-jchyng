@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.constant.Event;
 import christmas.constant.Gift;
+import christmas.domain.Visit;
 import christmas.domain.order.Orders;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -66,5 +68,20 @@ class EventApplicantTest {
         int discount = eventApplicant.getWeekdayDiscount(orders);
         //Then
         assertThat(discount).isEqualTo(Event.평일_할인.discount() * 2);
+    }
+
+    @DisplayName("모든 이벤트를 적용한 혜택 내역을 계산한다.")
+    @Test
+    void calcBenefitInfo() {
+        //Given
+        Visit visit = new Visit(3);
+        Orders orders = new Orders("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        //When
+        Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
+        //Then
+        assertThat(benefits.get(Event.크리스마스_디데이.getName())).isEqualTo(1_200);
+        assertThat(benefits.get(Event.평일_할인.getName())).isEqualTo(4_046);
+        assertThat(benefits.get(Event.특별_할인.getName())).isEqualTo(1_000);
+        assertThat(benefits.get(Event.증정_이벤트.getName())).isEqualTo(25_000);
     }
 }

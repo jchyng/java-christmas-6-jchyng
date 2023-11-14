@@ -4,10 +4,13 @@ import christmas.constant.Gift;
 import christmas.domain.order.Order;
 import christmas.domain.order.Orders;
 import java.text.DecimalFormat;
+import java.util.Map;
 import java.util.Optional;
 
 public class OutputView {
     private static final DecimalFormat PRICE_FORMAT = new DecimalFormat("#,##0원");
+    private static final DecimalFormat NEGATIVE_PRICE_FORMAT = new DecimalFormat("-#,##0원");
+
     private static final String EMPTY = "없음";
 
 
@@ -34,6 +37,19 @@ public class OutputView {
                 p -> System.out.println(p.getMenu().getName() + " 1개"),
                 () -> System.out.println(EMPTY)
         );
+        System.out.println();
+    }
+
+    public void printBenefitInfo(Map<String, Integer> benefits) {
+        System.out.println("<혜택 내역>");
+
+        if (benefits.isEmpty()) {
+            System.out.println(EMPTY);
+            return;
+        }
+        for (Map.Entry<String, Integer> entry : benefits.entrySet()) {
+            System.out.println(entry.getKey() + ": " + NEGATIVE_PRICE_FORMAT.format(entry.getValue()));
+        }
         System.out.println();
     }
 }

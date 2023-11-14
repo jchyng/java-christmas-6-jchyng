@@ -6,6 +6,7 @@ import christmas.domain.order.Orders;
 import christmas.service.EventApplicant;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -24,9 +25,14 @@ public class Cashier {
         Orders orders = takeOrders();
 
         outputView.printMenu(orders);
+
         outputView.printAmountBeforeDiscount(orders.getAmount());
+
         Optional<Gift> gift = eventApplicant.getGift(orders);
         outputView.printGift(gift);
+
+        Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
+        outputView.printBenefitInfo(benefits);
     }
 
     private Visit getVisitDate() {
