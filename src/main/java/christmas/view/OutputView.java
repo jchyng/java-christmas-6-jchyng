@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.constant.Badge;
 import christmas.constant.Gift;
 import christmas.domain.order.Order;
 import christmas.domain.order.Orders;
@@ -68,4 +69,12 @@ public class OutputView {
         System.out.println(PRICE_FORMAT.format(finalPayment) + "\n");
     }
 
+    public void printBadge(Optional<Badge> badge) {
+        System.out.println("<12월 이벤트 배지>");
+
+        badge.ifPresentOrElse(
+                b -> System.out.println(b.name()),
+                () -> System.out.println(EMPTY)
+        );
+    }
 }

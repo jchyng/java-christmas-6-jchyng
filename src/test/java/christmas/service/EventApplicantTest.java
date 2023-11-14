@@ -3,6 +3,7 @@ package christmas.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.constant.Badge;
 import christmas.constant.Event;
 import christmas.constant.Gift;
 import christmas.domain.Visit;
@@ -122,5 +123,16 @@ class EventApplicantTest {
         int finalPayment = eventApplicant.getFinalPayment(amount, totalDiscount);
         //Then
         assertThat(finalPayment).isEqualTo(10_000);
+    }
+
+    @DisplayName("할인 받은 금액에 해당하는 배지 획득")
+    @Test
+    void getBadge() {
+        //Given
+        int totalDiscount = 20_000;
+        //When
+        Optional<Badge> badge = Badge.getBadge(totalDiscount);
+        //Then
+        assertThat(badge.get()).isEqualTo(Badge.산타);
     }
 }

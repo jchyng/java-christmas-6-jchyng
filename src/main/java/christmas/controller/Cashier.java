@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.constant.Badge;
 import christmas.constant.Gift;
 import christmas.domain.Visit;
 import christmas.domain.order.Orders;
@@ -40,6 +41,9 @@ public class Cashier {
 
         int discount = eventApplicant.getTotalDiscount(benefits, benefitAmount);
         outputView.printFinalPayment(eventApplicant.getFinalPayment(amount, discount));
+
+        Optional<Badge> badge = Badge.getBadge(benefitAmount);
+        outputView.printBadge(badge);
     }
 
     private Visit getVisitDate() {
