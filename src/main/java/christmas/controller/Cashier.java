@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Visit;
+import christmas.domain.order.Orders;
 import christmas.view.InputView;
 import java.util.function.Supplier;
 
@@ -9,7 +10,7 @@ public class Cashier {
 
     public void runAsManual() {
         Visit visit = getVisitDate();
-        String order = inputView.readOrder();
+        Orders orders = new Orders(inputView.readOrder());
     }
 
     private Visit getVisitDate() {
