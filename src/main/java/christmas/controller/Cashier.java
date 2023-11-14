@@ -3,14 +3,18 @@ package christmas.controller;
 import christmas.domain.Visit;
 import christmas.domain.order.Orders;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 import java.util.function.Supplier;
 
 public class Cashier {
     private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public void runAsManual() {
         Visit visit = getVisitDate();
         Orders orders = takeOrders();
+
+        outputView.printMenu(orders);
     }
 
     private Visit getVisitDate() {
