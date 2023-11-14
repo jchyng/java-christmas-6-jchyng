@@ -41,7 +41,7 @@ class EventApplicantTest {
         //Given
         Orders orders = new Orders("티본스테이크-2");
         //When
-        int discount = eventApplicant.getAllWeekendDiscount(orders);
+        int discount = eventApplicant.getWeekendDiscount(orders);
         //Then
         assertThat(discount).isEqualTo(Event.주말_할인.discount() * 2);
     }
@@ -52,7 +52,7 @@ class EventApplicantTest {
         //Given
         Orders orders = new Orders("아이스크림-2");
         //When
-        int discount = eventApplicant.getAllWeekdayDiscount(orders);
+        int discount = eventApplicant.getWeekdayDiscount(orders);
         //Then
         assertThat(discount).isEqualTo(Event.평일_할인.discount() * 2);
     }

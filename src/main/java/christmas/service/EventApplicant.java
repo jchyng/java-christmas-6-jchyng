@@ -16,7 +16,7 @@ public class EventApplicant {
         return Optional.empty();
     }
 
-    public int getAllWeekendDiscount(Orders orders) {
+    public int getWeekendDiscount(Orders orders) {
         int discount = 0;
         for (Order order : orders.getOrders()) {
             discount += order.getWeekendDiscount();
@@ -24,7 +24,7 @@ public class EventApplicant {
         return discount;
     }
 
-    public int getAllWeekdayDiscount(Orders orders) {
+    public int getWeekdayDiscount(Orders orders) {
         int discount = 0;
         for (Order order : orders.getOrders()) {
             discount += order.getWeekdayDiscount();
