@@ -1,14 +1,23 @@
 package christmas.controller;
 
+import christmas.constant.Gift;
 import christmas.domain.Visit;
 import christmas.domain.order.Orders;
+import christmas.service.EventApplicant;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class Cashier {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+
+    private final EventApplicant eventApplicant;
+
+    public Cashier(EventApplicant eventApplicant) {
+        this.eventApplicant = eventApplicant;
+    }
 
     public void runAsManual() {
         Visit visit = getVisitDate();
@@ -16,7 +25,8 @@ public class Cashier {
 
         outputView.printMenu(orders);
         outputView.printAmountBeforeDiscount(orders.getAmount());
-
+        Optional<Gift> gift = eventApplicant.getGift(orders);
+        outputView.printGift(gift);
     }
 
     private Visit getVisitDate() {
