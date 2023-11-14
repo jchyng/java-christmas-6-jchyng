@@ -10,13 +10,20 @@ public class Cashier {
 
     public void runAsManual() {
         Visit visit = getVisitDate();
-        Orders orders = new Orders(inputView.readOrder());
+        Orders orders = takeOrders();
     }
 
     private Visit getVisitDate() {
         return doWorkUntilComplete(() -> {
             int date = inputView.readDate();
             return new Visit(date);
+        });
+    }
+
+    private Orders takeOrders() {
+        return doWorkUntilComplete(() -> {
+            String input = inputView.readOrder();
+            return new Orders(input);
         });
     }
 
