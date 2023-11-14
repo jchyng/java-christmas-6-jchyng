@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.constant.MenuCategory;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuBoard;
 import christmas.exception.ExceptionMessage;
@@ -39,10 +40,13 @@ public class Orders {
 
     private void validate(List<Order> orders) {
         if (isDuplicateOrder(orders)) {
-            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_ORDER.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
         }
         if(isOverMAXCount(orders)){
-            throw new IllegalArgumentException(ExceptionMessage.OVER_MAX_COUNT_ORDER.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
+        }
+        if (isOnlyJuice(orders)) {
+            throw new IllegalArgumentException(ExceptionMessage.INPUT_ORDER.getMessage());
         }
     }
 
@@ -75,5 +79,14 @@ public class Orders {
             return true;
         }
         return false;
+    }
+
+    private boolean isOnlyJuice(List<Order> orders) {
+        for (Order order : orders) {
+            if (order.getMenu().getCategory() != MenuCategory.음료) {
+                return false;
+            }
+        }
+        return true;
     }
 }

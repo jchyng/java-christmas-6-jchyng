@@ -53,7 +53,8 @@ class OrdersTest {
         //When & Then
         assertThatThrownBy(() -> new Orders("양송이수프-1,양송이수프-2"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 같은 메뉴를 중복으로 주문할 수 없습니다. 다시 입력해 주세요.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+
     }
 
     @DisplayName("없는 메뉴 주문 시 예외 발생")
@@ -70,6 +71,15 @@ class OrdersTest {
     void createOrderByOverMinCount() {
         assertThatThrownBy(() -> new Orders("해산물파스타-20,레드와인-1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 한번에 20개 이상의 메뉴를 주문할 수 없습니다.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
+    @DisplayName("메뉴가 음료 밖에 없다면 예외 발생")
+    @Test
+    void createOrderByOnlyJuice() {
+        assertThatThrownBy(() -> new Orders("레드와인-1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+
     }
 }
