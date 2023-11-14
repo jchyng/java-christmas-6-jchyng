@@ -10,7 +10,7 @@ public enum Event {
     특별_할인(1_000, Calendar.START_DATE, Calendar.END_DATE),
     증정_이벤트(0, Calendar.START_DATE, Calendar.END_DATE);
 
-    private final static int CHRISTMAS_D_DAY_DISCOUNT_INCREMENT = 100;
+    public final static int CHRISTMAS_D_DAY_DISCOUNT_INCREMENT = 100;
     private final int discount;
     private final int startDate;
     private final int endDate;
@@ -19,10 +19,6 @@ public enum Event {
         this.discount = discount;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public static int getChristmasDiscount(int date) {
-        return Event.크리스마스_디데이.discount + (date - 1) * CHRISTMAS_D_DAY_DISCOUNT_INCREMENT;
     }
 
     public boolean isValid(int date) {
@@ -34,6 +30,10 @@ public enum Event {
 
     public String getName() {
         return name().replace("_", " ");
+    }
+
+    public int getDiscount() {
+        return discount;
     }
 
     public int discount() {

@@ -1,5 +1,8 @@
 package christmas.service;
 
+import static christmas.constant.Event.CHRISTMAS_D_DAY_DISCOUNT_INCREMENT;
+
+import christmas.constant.Event;
 import christmas.constant.Gift;
 import christmas.domain.Calendar;
 import christmas.domain.order.Order;
@@ -14,6 +17,10 @@ public class EventApplicant {
             return Optional.of(Gift.get());
         }
         return Optional.empty();
+    }
+
+    public int getChristmasDiscount(int date) {
+        return Event.크리스마스_디데이.getDiscount() + (date - 1) * Event.CHRISTMAS_D_DAY_DISCOUNT_INCREMENT;
     }
 
     public int getWeekendDiscount(Orders orders) {
