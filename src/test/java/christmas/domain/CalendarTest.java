@@ -83,4 +83,30 @@ class CalendarTest {
         //Then
         assertThat(isContain).isFalse();
     }
+
+    @DisplayName("일요일과 25일에는 특별 이벤트가 적용된다.")
+    @ValueSource(ints = {3, 25})
+    @ParameterizedTest
+    void validSpecialEvent(int date) {
+        //Given
+        List<Event> events = calendar.getEventsByDate(date);
+        //When
+        boolean isContain = events.contains(Event.특별_할인);
+        //Then
+        assertThat(isContain).isTrue();
+    }
+
+    @DisplayName("일요일과 25일 외에는 특별 이벤트가 적용되지 않는다.")
+    @ValueSource(ints = {1,2,4,5,6,7})
+    @ParameterizedTest
+    void invalidSpecialEvent(int date) {
+        //Given
+        List<Event> events = calendar.getEventsByDate(date);
+        //When
+        boolean isContain = events.contains(Event.특별_할인);
+        //Then
+        assertThat(isContain).isFalse();
+    }
+
+    
 }
