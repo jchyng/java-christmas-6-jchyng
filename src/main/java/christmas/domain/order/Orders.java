@@ -3,24 +3,24 @@ package christmas.domain.order;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuBoard;
 import christmas.exception.ExceptionMessage;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Orders {
-    private final Set<Order> orders;
+    private final List<Order> orders;
 
     public Orders(String input) {
         OrderFormatValidate(input);
         this.orders = createOrders(input);
     }
 
-    public Set<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    private Set<Order> createOrders(String input) {
-        Set<Order> orders = new HashSet<>();
+    private List<Order> createOrders(String input) {
+        List<Order> orders = new ArrayList<>();
         String[] inputOrders = input.split(",");
 
         for (String inputOrder : inputOrders) {
