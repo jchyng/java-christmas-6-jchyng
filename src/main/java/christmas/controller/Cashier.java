@@ -26,13 +26,26 @@ public class Cashier {
         Orders orders = takeOrders();
         int amount = orders.getAmount();
 
-        outputView.printMenu(orders);
+        showReceipt(orders, amount);
+        showEventHistory(orders, visit, amount);
+    }
 
+    private void showReceipt(Orders orders, int amount) {
+        outputView.printMenu(orders);
         outputView.printAmount(amount);
 
         Optional<Gift> gift = eventApplicant.getGift(orders);
         outputView.printGift(gift);
+    }
 
+    private Visit getVisitDate() {
+        return doWorkUntilComplete(() -> {
+            int date = inputView.readDate();
+            return new Visit(date);
+        });
+    }
+
+    private void showEventHistory(Orders orders, Visit visit, int amount){
         Map<String, Integer> benefits = eventApplicant.getBenefitInfo(orders, visit);
         outputView.printBenefitInfo(benefits);
 
@@ -45,14 +58,6 @@ public class Cashier {
         Optional<Badge> badge = Badge.getBadge(benefitAmount);
         outputView.printBadge(badge);
     }
-
-    private Visit getVisitDate() {
-        return doWorkUntilComplete(() -> {
-            int date = inputView.readDate();
-            return new Visit(date);
-        });
-    }
-
     private Orders takeOrders() {
         return doWorkUntilComplete(() -> {
             String input = inputView.readOrder();
