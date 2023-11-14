@@ -27,4 +27,8 @@ public class Order {
     public Menu getMenu() {
         return menu;
     }
+
+    public int getCount() {
+        return count;
+    }
 }

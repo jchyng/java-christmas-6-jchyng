@@ -64,4 +64,12 @@ class OrdersTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
+
+    @DisplayName("총 주문 개수가 20개 이상이라면 예외 발생")
+    @Test
+    void createOrderByOverMinCount() {
+        assertThatThrownBy(() -> new Orders("해산물파스타-20,레드와인-1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 한번에 20개 이상의 메뉴를 주문할 수 없습니다.");
+    }
 }

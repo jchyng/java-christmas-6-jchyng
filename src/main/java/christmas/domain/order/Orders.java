@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Orders {
+    private final int MAX_COUNT = 20;
     private final List<Order> orders;
 
     public Orders(String input) {
@@ -40,6 +41,9 @@ public class Orders {
         if (isDuplicateOrder(orders)) {
             throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_ORDER.getMessage());
         }
+        if(isOverMAXCount(orders)){
+            throw new IllegalArgumentException(ExceptionMessage.OVER_MAX_COUNT_ORDER.getMessage());
+        }
     }
 
     private void OrderFormatValidate(String input) {
@@ -63,4 +67,13 @@ public class Orders {
         return false;
     }
 
+    private boolean isOverMAXCount(List<Order> orders){
+        int count = orders.stream()
+                .mapToInt(Order::getCount)
+                .sum();
+        if(count > MAX_COUNT){
+            return true;
+        }
+        return false;
+    }
 }
