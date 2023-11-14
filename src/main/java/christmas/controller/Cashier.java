@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Visit;
 import christmas.view.InputView;
 import java.util.function.Supplier;
 
@@ -7,8 +8,13 @@ public class Cashier {
     private final InputView inputView = new InputView();
 
     public void runAsManual() {
-        int date = doWorkUntilComplete(() -> {
-            return inputView.readDate();
+        Visit visit = getVisitDate();
+    }
+
+    private Visit getVisitDate() {
+        return doWorkUntilComplete(() -> {
+            int date = inputView.readDate();
+            return new Visit(date);
         });
     }
 
