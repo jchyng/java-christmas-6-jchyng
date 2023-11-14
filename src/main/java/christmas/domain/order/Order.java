@@ -24,4 +24,7 @@ public class Order {
         return count == order.count && Objects.equals(menu, order.menu);
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
 }

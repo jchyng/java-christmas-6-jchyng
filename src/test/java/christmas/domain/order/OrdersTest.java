@@ -46,4 +46,13 @@ class OrdersTest {
                 new Order(MenuBoard.getMenu("초코케이크"), 1)
         );
     }
+
+    @DisplayName("메뉴를 중복해서 주문 시 예외 발생")
+    @Test
+    void createOrderByDuplicate() {
+        //When & Then
+        assertThatThrownBy(() -> new Orders("양송이수프-1,양송이수프-2"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 같은 메뉴를 중복으로 주문할 수 없습니다. 다시 입력해 주세요.");
+    }
 }

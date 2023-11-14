@@ -4,7 +4,9 @@ import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuBoard;
 import christmas.exception.ExceptionMessage;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Orders {
@@ -30,7 +32,14 @@ public class Orders {
 
             orders.add(new Order(menu, count));
         }
+        validate(orders);
         return orders;
+    }
+
+    private void validate(List<Order> orders) {
+        if (isDuplicateOrder(orders)) {
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_ORDER.getMessage());
+        }
     }
 
     private void OrderFormatValidate(String input) {
@@ -42,6 +51,16 @@ public class Orders {
     private boolean isMatchOrderFormat(String input) {
         String regex = "^([ㄱ-ㅎ가-힣]+-\\d+)(?:,[ㄱ-ㅎ가-힣]+-\\d+)*$";   //메뉴-개수(1~20)..., 메뉴-개수
         return Pattern.matches(regex, input);
+    }
+
+    private boolean isDuplicateOrder(List<Order> orders) {
+        Set<Menu> uniqueMenus = new HashSet<>();
+        for (Order order : orders) {
+            if (!uniqueMenus.add(order.getMenu())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
