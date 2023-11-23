@@ -5,7 +5,8 @@ import christmas.service.EventApplicant;
 
 public class Application {
     public static void main(String[] args) {
-        Cashier cashier = new Cashier(new EventApplicant());
+        EventApplicant eventApplicant = new EventApplicant();
+        Cashier cashier = new Cashier(eventApplicant);
 
         cashier.runAsManual();
     }

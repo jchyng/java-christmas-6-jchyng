@@ -30,19 +30,26 @@ public class Cashier {
         showEventHistory(orders, visit, amount);
     }
 
+    private Visit getVisitDate() {
+        return doWorkUntilComplete(() -> {
+            int date = inputView.readDate();
+            return new Visit(date);
+        });
+    }
+
+    private Orders takeOrders() {
+        return doWorkUntilComplete(() -> {
+            String input = inputView.readOrder();
+            return new Orders(input);
+        });
+    }
+
     private void showReceipt(Orders orders, int amount) {
         outputView.printMenu(orders);
         outputView.printAmount(amount);
 
         Optional<Gift> gift = eventApplicant.getGift(orders);
         outputView.printGift(gift);
-    }
-
-    private Visit getVisitDate() {
-        return doWorkUntilComplete(() -> {
-            int date = inputView.readDate();
-            return new Visit(date);
-        });
     }
 
     private void showEventHistory(Orders orders, Visit visit, int amount){
@@ -57,12 +64,6 @@ public class Cashier {
 
         Optional<Badge> badge = Badge.getBadge(benefitAmount);
         outputView.printBadge(badge);
-    }
-    private Orders takeOrders() {
-        return doWorkUntilComplete(() -> {
-            String input = inputView.readOrder();
-            return new Orders(input);
-        });
     }
 
     private <T> T doWorkUntilComplete(Supplier<T> work) {
